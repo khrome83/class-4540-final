@@ -7,6 +7,15 @@
 
 declare copy-namespaces no-preserve, no-inherit;
 
+
+(: Added comment block and xml-stylesheet defininition :)
+<!--
+    Name: Zane C. Milakovic
+    Date: 11/10/2015
+    File: aggregate.xml
+    Final Project
+-->,
+<?xml-stylesheet type="text/xsl" href="aggregate.xsl"?>,
 <rss version="2.0"
    	xmlns:content="http://purl.org/rss/1.0/modules/content/"
 	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
@@ -15,13 +24,12 @@ declare copy-namespaces no-preserve, no-inherit;
 	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
 	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
 	xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
-	xmlns:media="http://search.yahoo.com/mrss/"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="rss-2_0.xsd">
 	<channel>
-	   <title>Web Development Podcast Aggragate</title>
+	   <title>Web Development Podcast Aggregate</title>
 	   <description>A aggregation of four web development podcasts, sorted by date published.</description>
-        {
+       <link>http://zanemilakovic.com</link>
+       {
         
             let $items := (
                 doc("source/backToFront.xml")//item,
@@ -52,8 +60,10 @@ declare copy-namespaces no-preserve, no-inherit;
                 
                 return
                     <item>
+                        <year>{$pieces[4]}</year>
                     {
                          $x/title,
+                         $x/guid,
                          $x/link,
                          $x/pubDate,
                          $x/itunes:author,

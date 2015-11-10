@@ -1,0 +1,242 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 0;
+	margin: 0;
+}
+
+h1 {
+	color: #fff;
+	background-color: #f33;
+	margin: 0;
+	padding: 20px 0;
+}
+
+.infobar {
+	background-color: #ccc;
+	margin-bottom: 0 0 20px 0;
+	padding: 10px 0;
+	border-color: #bbb;
+	border-style: solid;
+	border-width: 1px 0;
+}
+
+.filter {
+	color: #000;
+	text-decoration: none;
+	border-bottom: 1px dashed #000;
+}
+
+.total {
+	font-weight: bold;
+	float: right;
+}
+
+.calc {
+	width: 300px;
+	margin: 0 auto;
+	text-align: left;
+}
+
+.final {
+	border-top:  1px solid #555;
+	margin-top: 10px;
+}
+
+.infobarcontent {
+	margin: 0 auto;
+}
+
+h3 {
+	font-size: 0.9em;
+	margin: 0 0 10px 0;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #555;
+}
+
+footer {
+	margin: 20px 0 0 0;
+	padding: 20px 0;
+	color: #fff;
+	background-color: #f33;
+	clear: both;
+	float: left;
+	width: 100%;
+}
+
+.content {
+	width: 400px;
+	margin: 0 auto;
+}
+
+.entry {
+	text-align: left;
+	margin: 10px 20px;
+	width: 360px;
+	float: left;
+	border: 1px solid #bbb;
+	padding: 10px;
+	background-color: #fcfcfc;
+	min-height: 170px;
+	position: relative;
+}
+
+.img {
+	width: 70px;
+	margin-right: 10px;
+	float: left;
+}
+
+.img img {
+	width: 70px;
+	height: 70px;
+}
+
+.info {
+	float: left;
+	width: 240px;
+}
+
+.citation {
+	text-align: right;
+}
+
+.author {
+	font-style: italic;
+	font-size: 0.6em;
+	color: #333;
+}
+
+.context {
+	padding-right: 6px;
+	font-size: 0.5em;
+}
+
+.linkbar {
+	position: absolute;
+	background-color: #f33;
+	color: #fff;
+	font-weight: 600;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	vertical-align: center;
+}
+
+.linkbar a {
+	text-decoration: none;
+	color: #fff;
+	font-size: 0.8em;
+}
+
+.desc {
+	text-align: left;
+	background-color: #fcfcfc;
+	border: 1px solid #bbb;
+	width: 360px;
+	padding: 20px;
+	margin: 20px auto;
+	position: relative;
+}
+
+.togglesource, dl a {
+	text-decoration: none;
+	color: #f33;
+	border-bottom: 1px dashed #f33;
+}
+
+.sourcebar {
+	text-align: center;
+}
+
+.close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 20px;
+	width: 20px;
+	color: #fff;
+	background-color: #f33;
+	text-decoration: none;
+	text-align: center;
+	font-weight: bold;
+	font-size: 1em;
+}
+
+@media screen and (min-width: 800px) {
+	.content {
+		width: 800px;
+	}
+	
+	.entry {
+		margin: 20px 20px;
+	}
+	
+	.calc {
+		margin: 0 auto;
+		text-align: left;
+		display: inline;
+	}
+	
+	.final {
+		width: 150px;
+		border-top-width: 0px;
+		margin-top: 0px;
+	}
+	
+	.total {
+		float: none;
+		padding: 0 18px 0 0px;
+	}
+	
+	.infobarcontent {
+		width: 800px;
+	}
+	
+	.desc {
+		width: 760px;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.content {
+		width: 1200px;
+	}
+	
+	.desc {
+		width: 1160px;
+	}
+	
+}
+
+@media screen and (min-width: 1600px) {
+	.content {
+		width: 1600px;
+	}
+	
+	.desc {
+		width: 1560px;
+	}
+}
+
+@media screen and (min-width: 2000px) {
+	.content {
+		width: 2000px;
+	}
+	
+	.desc {
+		width: 1960px;
+	}
+}
