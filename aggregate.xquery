@@ -1,37 +1,77 @@
 (:
     Name: Zane C. Milakovic
-    Date: 11/08/2015
-    File: toilet.1.xquery
+    Date: 11/10/2015
+    File: aggregate.xquery
+    Final Project
 :)
 
-declare default element namespace "http://toiletmap.gov.au/";
 declare copy-namespaces no-preserve, no-inherit;
 
-<Toilets
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema-datatypes"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    {
-        let $doc := doc("ToiletmapExport.xml")//ToiletDetails
-        let $allToilets := $doc[Town = "Darkan"]
+<rss version="2.0"
+   	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+	xmlns:media="http://search.yahoo.com/mrss/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="rss-2_0.xsd">
+	<channel>
+	   <title>Web Development Podcast Aggragate</title>
+	   <description>A aggregation of four web development podcasts, sorted by date published.</description>
+        {
         
-        for $x in $allToilets
-            let $lat := string($x/@Latitude)
-            let $long := string($x/@Longitude)
-            let $town := string($x/Town)
-            let $state := string($x/State)
-            let $country := string("Australia")
-            let $name := string($x/Name)
-            let $type := string($x/GeneralDetails/FacilityType)
-            return
-                <Toilet
-                    Latitude="{$lat}"
-                    Longitude="{$long}"
-                    Town="{$town}"
-                    State="{$state}"
-                    Country="{$country}"
-                    Name="{$name}"
-                    FacilityType="{$type}"
-                />
-    }
-</Toilets>
+            let $items := (
+                doc("source/backToFront.xml")//item,
+                doc("source/shopTalkShow.xml")//item,
+                doc("source/theWebAhead.xml")//item,
+                doc("source/unfinishedBusiness.xml")//item
+            )
+    
+            for $x in $items
+                (:
+                    The follow borrows concepts from this site to format pubDate element in a way that can be ordered.
+                    Input: Sat, 17 Jan 2015 09:17:03 +0000
+                    Output: 2015-01-17T09:17:03-00:00
+                    
+                    Source: http://nativexmldatabase.com/2011/03/18/xquery-and-sqlxml-how-to-convert-a-date-that-is-not-a-date-into-a-date/
+                :)
+                
+                let $date := string($x/pubDate)
+                let $pieces := fn:tokenize($date, " ")
+                let $map := <map><Jan>01</Jan><Feb>02</Feb><Mar>03</Mar><Apr>04</Apr><May>05</May><Jun>06</Jun><Jul>07</Jul><Aug>08</Aug><Sep>09</Sep><Oct>10</Oct><Nov>11</Nov><Dec>12</Dec></map>
+                let $month := $map/*[name()=$pieces[3]]/text()
+                let $timestamp := fn:concat($pieces[4],"-",$month,"-",$pieces[2],"T",$pieces[5])
+    
+                (: Order by the now correct timestamp, dateTime format :)
+                order by xs:dateTime($timestamp)
+                
+                let $img := string($x/itunes:image/@href)
+                
+                return
+                    <item>
+                    {
+                         $x/title,
+                         $x/link,
+                         $x/pubDate,
+                         $x/itunes:author,
+                         $x/itunes:duration,
+                         $x/enclosure
+                    }
+                    {
+                       (:
+                           Need to ensure we have some image as a default
+                           only if field does not exist in original RSS
+                       :)
+                        if(fn:string-length($img) > 0)
+                        then
+                         <itunes:image href="{$img}"/>
+                        else
+                         <itunes:image href="default.jpg"/>
+                    }
+                    </item>
+        }
+    </channel>
+</rss>
