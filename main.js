@@ -1,3 +1,10 @@
+/*
+    Name: Zane C. Milakovic
+    Date: 11/10/2015
+    File: main.js
+	Project: Final
+*/
+
 $(function() {
 
     $(".filter").on("click", function() {

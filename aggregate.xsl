@@ -95,7 +95,7 @@
                 </div>
                 <div class="desc">
                     <h4>About the Project</h4>
-                    <p>This project takes four podcast feeds from different web development podcasts and aggregates them together. They are ordered by the original publish date. The filters at the top are provided to allow you to view a specific year. The site is responsive and is expected to work on a mobile device.</p>
+                    <p>This project takes four podcast feeds from different web development podcasts and aggregates them together. They are ordered by the original publish date. The filters at the top are provided to allow you to view a specific year. The site is responsive and is expected to work on most mobile device. Site was tested in most recent version of FireFox and Internet Explorer 11.</p>
                     <div class="sourcebar">
                         <a class="togglesource" href="#sources" title="Toggle Sources">Toggle Sources</a>
                     </div>
